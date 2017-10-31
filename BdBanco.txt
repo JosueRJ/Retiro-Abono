@@ -1,0 +1,43 @@
+CREATE DATABASE Banco;
+
+CREATE TABLE Cliente(
+    dni VARCHAR(8) NOT NULL,
+    nombres VARCHAR(45),
+    apPaterno VARCHAR(45),
+    apMaterno VARCHAR(45),
+    
+    PRIMARY KEY(dni)
+);
+
+CREATE TABLE Cuenta(
+    nroCuenta VARCHAR(10) NOT NULL, 
+    tipo VARCHAR(45),
+    dni VARCHAR(8),
+    PRIMARY KEY (nroCuenta),
+    FOREIGN KEY(dni) REFERENCES Cliente(dni)
+);
+
+CREATE TABLE Movimiento(
+    nroMovimiento VARCHAR(10) NOT NULL,
+    tipoMovimiento VARCHAR(45),
+    monto VARCHAR(45),
+    nroCuenta VARCHAR(10),
+    PRIMARY KEY(nroMovimiento),
+   FOREIGN KEY(nroCuenta) REFERENCES Cuenta (nroCuenta)
+);
+
+INSERT INTO Cliente VALUES ('12345678','Juan','Perez','Velez');
+INSERT INTO Cliente VALUES ('11223344','Rosa','Lupe','Colla');
+INSERT INTO Cliente VALUES ('87654321','Mario','Nuñez','Velasquez');
+
+INSERT INTO Cuenta VALUES ('C001','Ahorros','12345678');
+INSERT INTO Cuenta VALUES ('C002','Ahorros','11223344');
+INSERT INTO Cuenta VALUES ('C003','Ahorros','87654321');
+
+INSERT INTO Movimiento VALUES ('M001','Abono','200.00','C001');
+INSERT INTO Movimiento VALUES ('M002','Abono','150.00','C002');
+INSERT INTO Movimiento VALUES ('M003','Retiro','100.00','C003');
+
+SELECT * FROM Cliente;
+SELECT * FROM Cuenta;
+SELECT * FROM Movimiento;
